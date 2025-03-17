@@ -194,7 +194,7 @@ export default class extends Module {
 		if (!msg.isDm) return true;
 
 		msg.reply(
-			msg.friend.love >= 5 ? (msg.friend.name ? serifs.core.suki.love(msg.friend.name) : serifs.core.suki.normal) :
+			msg.friend.love >= 5 ? serifs.core.suki.love(msg.friend.name) :
 			msg.friend.love <= -3 ? serifs.core.suki.hate :
 			serifs.core.suki.normal);
 
@@ -272,7 +272,9 @@ export default class extends Module {
 		// メッセージのみ
 		if (!msg.isDm) return true;
 
-		msg.reply(serifs.core.itai(msg.friend.name));
+		msg.reply(
+			msg.friend.love <= -5 ? serifs.core.itai.hate :
+			serifs.core.itai.normal(msg.friend.name));
 
 		return true;
 	}
